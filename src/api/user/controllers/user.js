@@ -4,6 +4,7 @@
  * A set of functions called "actions" for `user`
  */
 const { factories } = require("@strapi/strapi");
+const RESPONSE = require("../../../utils/response");
 
 module.exports = factories.createCoreController(
   "api::user.user",
@@ -12,7 +13,7 @@ module.exports = factories.createCoreController(
       try {
         const result = await strapi.service("api::user.user").findMany();
 
-        ctx.send({ users: result });
+        ctx.send(RESPONSE.ok("All users get successful", result));
       } catch (err) {
         ctx.body = err;
       }

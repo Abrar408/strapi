@@ -375,7 +375,11 @@ export interface ApiBlogBlog extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String;
-    author: Attribute.Relation<'api::blog.blog', 'manyToOne', 'api::user.user'>;
+    author: Attribute.Relation<
+      'api::blog.blog',
+      'manyToMany',
+      'api::user.user'
+    >;
     content: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -396,7 +400,7 @@ export interface ApiUserUser extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     firstName: Attribute.String & Attribute.Required;
@@ -404,7 +408,6 @@ export interface ApiUserUser extends Schema.CollectionType {
     blogs: Attribute.Relation<'api::user.user', 'manyToMany', 'api::blog.blog'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::user.user', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::user.user', 'oneToOne', 'admin::user'> &

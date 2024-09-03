@@ -16,7 +16,7 @@
     },
     "author": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::user.user",
       "inversedBy": "blogs"
     },
