@@ -3,4 +3,15 @@
  */
 
 const { factories } = require("@strapi/strapi");
-module.exports = factories.createCoreRouter("api::user.user");
+const validation = require("../../../middleware/validation");
+const { userCreateSchema, userUpdateSchema } = require("../validations/user");
+module.exports = factories.createCoreRouter("api::user.user", {
+  config: {
+    create: {
+      middlewares: [validation(userCreateSchema)],
+    },
+    update: {
+      middlewares: [validation(userUpdateSchema)],
+    },
+  },
+});
